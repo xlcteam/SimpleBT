@@ -5,7 +5,7 @@ import wx, glob, serial, sys
 from obrazky import *
 
 class arrowsPanel(wx.Panel):
-    def __init__(self, parent, id, port=None):
+    def __init__(self, parent, id, port=None, s=None):
         wx.Panel.__init__(self, parent, id, size=(220, 430), style=wx.SUNKEN_BORDER)
 
         self.pressedBtns = []
@@ -58,7 +58,7 @@ class arrowsPanel(wx.Panel):
 
         self.Bind(wx.EVT_COMBOBOX, self.OnCombo)
         self.port = None
-        self.s = None
+        self.s = s
 
 
     def OnDribbler(self, event):
@@ -278,7 +278,8 @@ if __name__ == "__main__":
     if len(s) != 0:
         app = wx.App()
         frame = wx.Frame(None, -1, title="Arrows alone") 
-        arrowsPanel(frame, -1, port=port)
+        s = serial.Serial(port, 115200, timeout=1)
+        arrowsPanel(frame, -1, port=port, s=s)
         app.MainLoop()
         frame.SetMinSize((230, 340))
         frame.SetMaxSize((230, 340))

@@ -32,8 +32,8 @@ class Arrows(wx.Frame):
         self.statusbar.SetStatusText(status)
 
         
-        Arrows = arrowsPanel(self, -1, self.port)
-        irPlotter = IrPlotter(self, -1, self.port)        
+        Arrows = arrowsPanel(self, -1, port=self.port, s=self.s)
+        irPlotter = IrPlotter(self, -1, port=self.port, s=self.s)        
         
         #self.SetMinSize((230, 340))
         #self.SetMaxSize((230, 340))

@@ -4,13 +4,14 @@
 import wx, math, sys, serial, glob
 
 class IrPlotter(wx.Panel):
-    def __init__(self, parent, id, port=None):
+    def __init__(self, parent, id, port=None, s=None):
         wx.Panel.__init__(self, parent, id, size=(500, 300))
         
         self.irs = [1023, 1023, 1023, 1023, 1023, 1023, 1023]
         self.max = 0
         
         self.port = port
+        self.s = s
 
         self.Bind(wx.EVT_PAINT, self.OnPaint)
         self.Show(True)
@@ -24,11 +25,9 @@ class IrPlotter(wx.Panel):
         self.OnPaint()
         self.Refresh()
 
-    def sensorRead(self):
-        s = serial.Serial(self.port, 115200, timeout=1)
-        
+    def sensorRead(self):        
         # start the sensor output
-        s.write(":s;")
+        self.s.write(":s;")
 
         i = 0
         while 1:
@@ -92,8 +91,9 @@ if __name__ == "__main__":
 
     if len(s) != 0:
         app = wx.App()
-        frame = wx.Frame(None, -1, title="IrPlotter alone") 
-        IrPlotter(frame, -1, port=port)
+        frame = wx.Frame(None, -1, title="IrPlotter alone")
+        s = serial.Serial(port, 115200, timeout=1)
+        IrPlotter(frame, -1, port=port, s=s)
         frame.Show()
         app.MainLoop()
 

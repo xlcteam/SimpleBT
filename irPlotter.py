@@ -86,10 +86,8 @@ if __name__ == "__main__":
         print "[%d] %s" % (x,y)
     
     if len(s) == 0: print "nothing"
-
-    port = s[input("Select port id: ")]
-
-    if len(s) != 0:
+    else:
+        port = s[input("Select port id: ")]
         app = wx.App()
         frame = wx.Frame(None, -1, title="IrPlotter alone")
         s = serial.Serial(port, 115200, timeout=1)

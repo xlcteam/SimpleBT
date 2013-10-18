@@ -62,7 +62,7 @@ class arrowsPanel(wx.Panel):
 
 
     def OnDribbler(self, event):
-        value = self.buttons[12].GetValue()
+        value = self.buttons[10].GetValue()
         if value == 1:
             if self.s != None:
                 self.s.write('d\r\n')
@@ -273,13 +273,15 @@ if __name__ == "__main__":
     
     if len(s) == 0: print "nothing"
     else:
-        port = s[input("Select port id: ")]
+        port = s[int(input("Select port id: "))]
         app = wx.App()
-        frame = wx.Frame(None, -1, title="Arrows alone") 
+        frame = wx.Frame(None, -1, title="Arrows alone", size=(230, 4400),
+                        style=wx.CLOSE_BOX | wx.CAPTION | wx.SYSTEM_MENU |
+                                  wx.RESIZE_BORDER | wx.MINIMIZE_BOX) 
         s = serial.Serial(port, 115200, timeout=1)
         arrowsPanel(frame, -1, port=port, s=s)
-        app.MainLoop()
         frame.SetMinSize((230, 340))
         frame.SetMaxSize((230, 340))
+        frame.Centre()
         frame.Show()
         app.MainLoop()  

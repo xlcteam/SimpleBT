@@ -22,18 +22,19 @@ def scan():
 
 class Arrows(wx.Frame):
     def __init__(self, parent, id, title, port):
-        wx.Frame.__init__(self, parent, id, title, size=(720, 730),
+        wx.Frame.__init__(self, parent, id, title, size=(230, 440),
                           style=wx.CLOSE_BOX | wx.CAPTION | wx.SYSTEM_MENU |
                                   wx.RESIZE_BORDER | wx.MINIMIZE_BOX)
 
         self.port = port
         self.s = serial.Serial(self.port, 115200, timeout=1)
         self.statusbar = self.CreateStatusBar()
+        status = 'Connected'
         self.statusbar.SetStatusText(status)
 
         
         Arrows = arrowsPanel(self, -1, port=self.port, s=self.s)
-        irPlotter = IrPlotter(self, -1, port=self.port, s=self.s)        
+        #irPlotter = IrPlotter(self, -1, port=self.port, s=self.s)        
         
         #self.SetMinSize((230, 340))
         #self.SetMaxSize((230, 340))
@@ -42,7 +43,7 @@ class Arrows(wx.Frame):
 
 class Choose(wx.Frame):
     def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, size=(310, 30))
+        wx.Frame.__init__(self, parent, id, title, size=(310, 60))
 
         self.port = None
         self.s = None
